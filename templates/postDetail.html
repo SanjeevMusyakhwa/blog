@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row ">
+  <div class="col mt-5">
+    {% if request.user.is_authenticated %}
+    <div class="bn">
+    <a href="{% url 'postUpdate' post.pk %}" class="btn btn-primary">Edit</a>
+    <a href="{% url 'postDelete' post.pk %}" class="btn btn-danger">Delete</a>
+  </div>
+  {% endif %}
+    <p class="post-meta">
+      {{ post.published_at }}
+    </p>
+    <!-- Post preview-->
+    <div class="post-preview">
+      <a href="{% url 'postDetail' post.pk %}">
+        <h2 class="post-title">{{ post.title}}</h2>
+        </h3>
+      </a>
+      <p class="post-subtitle">{{ post.content|linebreaksbr }}
+      </p>
+      <p class="post-meta">
+        @{{ post.author.username }}
+      </p>
+    </div>
+    {% endblock content %}

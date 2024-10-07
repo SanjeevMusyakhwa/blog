@@ -1,13 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-  {% for post in posts %}
-    
-  <div class="row">
-    <div class="col">
-      <div class="date">{{ post.published_at}}</div>
-    </div>
-  </div>
-  {% endfor %}
+{% for post in posts %}
+  <div class="row  justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+      <p class="post-meta">
+        {{ post.published_at }}
+      </p>
+      <!-- Post preview-->
+      <div class="post-preview">
+        <a href="{% url 'postDetail' post.pk %}">
+          <h2 class="post-title">{{ post.title}}</h2>
+          </h3>
+        </a>
+        <p class="post-subtitle">{{ post.content|truncatechars:200 }}
+          <a href="{% url 'postDetail' post.pk %}">View More</a>
+          </p>
+          <p class="post-meta">
+            @{{ post.author.username }}
+          </p>
+      </div>
+      <!-- Divider-->
+      <hr class="my-4" />
+      <!-- Pager-->
 
-  
+    </div>
+  </div> 
+  {% endfor %} 
+  <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase"
+    href="#!">Older Posts →</a>
+</div>
+
 {% endblock content %}
